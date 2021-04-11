@@ -68,6 +68,15 @@ repository into the same top-level directory path.
 
 A script to begin a drive Burn-In for a collection of drives.
 
+The following steps will be performed:
+1. Start a new TMUX session named “drive_burnin[_{session_suffix}]” (The brackets ([]) indicate the format used if a suffix is provided)
+2. Pull drive list from passed in values or grab all available SMART drives
+3. Prompt for the user to confirm, if not ask about each drive
+4. Setup a TMUX grid layout for all drives being burned in
+5. Attach to the new TMUX session
+6. Start the Burn-In process
+7. End the TMUX session, if chosen, on detach
+
 _Usage_
 
 ```
@@ -111,6 +120,31 @@ _Drives Tested_
 
 A script to begin a drive Burn-In for a single drive.
 
+The following steps will be performed:
+1.  Pull drive info and display it
+2.  Run a SMART conveyance test
+3.  Run a SMART short test
+4.  Run a SMART long test
+5.  Read SMART results and display them
+6.  Run a basic imaging write test
+7.  Read SMART results and display them
+8.  Run a basic imaging read test
+9.  Read SMART results and display them
+10. HDD/SSD Specific Steps
+    1. HDD
+        1. Run a basic imaging read-write test
+        2. Read SMART results and display them
+        3. Run a destructive BadBlocks test
+        4. Read SMART results and display them
+    2. SSD
+        1. Nothing at this time
+11. Run a SMART conveyance test
+12. Run a SMART short test
+13. Run a SMART long test
+14. Read SMART results and display them
+15. If desired, zero-out the drive
+16. Pull drive info and display it
+
 _Usage_
 
 ```
@@ -151,6 +185,15 @@ _Drives Tested_
 
 A script to begin a drive erase for a collection of drives.
 
+The following steps will be performed:
+1. Start a new TMUX session named “drive_erase[_{session_suffix}]” (The brackets ([]) indicate the format used if a suffix is provided)
+2. Pull drive list from passed in values or grab all available SMART drives
+3. Prompt for the user to confirm, if not ask about each drive
+4. Setup a TMUX grid layout for all drives being erased
+5. Attach to the new TMUX session
+6. Start the Erase process
+7. End the TMUX session, if chosen, on detach
+
 _Usage_
 
 ```
@@ -190,6 +233,19 @@ _Drives Tested_
 #### erase_drive.sh
 
 A script to begin a drive erase for a single drive.
+
+The following steps will be performed:
+1. Pull drive info and display it
+2. HDD/SSD Specific Steps
+    1. HDD
+        1. Run a pass with a RANDOM pattern
+        2. Run a pass with a RANDOM pattern
+        3. Run a pass with a ZERO pattern
+    2. SSD
+        1. Run a pass with a RANDOM pattern
+        2. Run a pass with a RANDOM pattern
+        3. Run a pass with a ZERO pattern
+3. Pull drive info and display it
 
 _Usage_
 
