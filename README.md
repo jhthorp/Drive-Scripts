@@ -142,7 +142,7 @@ The following steps will be performed:
 12. Run a SMART short test
 13. Run a SMART long test
 14. Read SMART results and display them
-15. If desired, zero-out the drive
+15. If desired, zero-out the drive, otherwise write random data across it
 16. Pull drive info and display it
 
 _Usage_
