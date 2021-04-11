@@ -10,7 +10,7 @@ operating systems for any drive procedures such as Burn-In/Erase processes.
 * [Prerequisites](#prerequisites)
 * [Setup](#setup)
 * [Scripts](#scripts)
-	* [Burn-In](#burnin)
+	* [Burn-In](#burn-in)
 		* [burnin_drives.sh](#burnin_drivessh)
 		* [burnin_drive.sh](#burnin_drivesh)
 	* [Erase](#erase)
