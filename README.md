@@ -69,7 +69,8 @@ repository into the same top-level directory path.
 A script to begin a drive Burn-In for a collection of drives.
 
 The following steps will be performed:
-1. Start a new TMUX session named “drive_burnin[_{session_suffix}]” (The brackets ([]) indicate the format used if a suffix is provided)
+1. Start a new TMUX session named “drive_burnin[_{session_suffix}]” (The 
+brackets ([]) indicate the format used if a suffix is provided)
 2. Pull drive list from passed in values or grab all available SMART drives
 3. Prompt for the user to confirm, if not ask about each drive
 4. Setup a TMUX grid layout for all drives being burned in
@@ -80,8 +81,8 @@ The following steps will be performed:
 _Usage_
 
 ```
-[bash] ./burnin_drives.sh [drives_override] [zero_drives] [session_suffix] 
-[end_on_detach]
+[bash] ./burnin_drives.sh [auto_skip] [drives_override] [zero_drives] 
+[session_suffix] [end_on_detach]
 ```
 
 _Options_
@@ -94,6 +95,7 @@ _Parameters_
 
 |         Parameter         |                   Description                    |
 |           :---:           |                      :---:                       |
+|      Automated Skip       |            Continue without prompting            |
 |      Drives Override      |          Array of drive IDs to burn-in           |
 |        Zero Drives        |   Zero the drives after testing has completed    |
 |      Session Suffix       |        Suffix to add to the session name         |
@@ -105,6 +107,8 @@ _Examples_
 * **./burnin_drives.sh** "/dev/da0 /dev/da1 /dev/da2" true
 * **./burnin_drives.sh** "/dev/da0 /dev/da1 /dev/da2" false "session2"
 * **./burnin_drives.sh** "/dev/da0 /dev/da1 /dev/da2" false "session2" true
+* **./burnin_drives.sh** "auto_skip""/dev/da0 /dev/da1 /dev/da2" false 
+"session2" true
 
 _Drives Tested_
 
@@ -148,7 +152,7 @@ The following steps will be performed:
 _Usage_
 
 ```
-[bash] ./burnin_drive.sh <drive> [zero_drive]
+[bash] ./burnin_drive.sh [auto_skip] <drive> [zero_drive]
 ```
 
 _Options_
@@ -161,6 +165,7 @@ _Parameters_
 
 |         Parameter         |                   Description                    |
 |           :---:           |                      :---:                       |
+|      Automated Skip       |            Continue without prompting            |
 |           Drive           |                  Drive to test                   |
 |        Zero Drive         |    Zero the drive after testing has completed    |
 
@@ -168,6 +173,7 @@ _Examples_
 
 * **./burnin_drive.sh** "/dev/da1"
 * **./burnin_drive.sh** "/dev/da1" true
+* **./burnin_drive.sh** "auto_skip" "/dev/da1" true
 
 _Drives Tested_
 
@@ -186,7 +192,8 @@ _Drives Tested_
 A script to begin a drive erase for a collection of drives.
 
 The following steps will be performed:
-1. Start a new TMUX session named “drive_erase[_{session_suffix}]” (The brackets ([]) indicate the format used if a suffix is provided)
+1. Start a new TMUX session named “drive_erase[_{session_suffix}]” (The 
+brackets ([]) indicate the format used if a suffix is provided)
 2. Pull drive list from passed in values or grab all available SMART drives
 3. Prompt for the user to confirm, if not ask about each drive
 4. Setup a TMUX grid layout for all drives being erased
@@ -197,7 +204,8 @@ The following steps will be performed:
 _Usage_
 
 ```
-[bash] ./erase_drives.sh [drives_override] [session_suffix] [end_on_detach]
+[bash] ./erase_drives.sh [auto_skip] [drives_override] [session_suffix] 
+[end_on_detach]
 ```
 
 _Options_
@@ -210,6 +218,7 @@ _Parameters_
 
 |         Parameter         |                   Description                    |
 |           :---:           |                      :---:                       |
+|      Automated Skip       |            Continue without prompting            |
 |      Drives Override      |           Array of drive IDs to erase            |
 |      Session Suffix       |        Suffix to add to the session name         |
 |       End On Detach       |  End process when the TMUX session is detached   |
@@ -219,6 +228,7 @@ _Examples_
 * **./erase_drives.sh** "/dev/da0 /dev/da1 /dev/da2"
 * **./erase_drives.sh** "/dev/da0 /dev/da1 /dev/da2" "session2"
 * **./erase_drives.sh** "/dev/da0 /dev/da1 /dev/da2" "session2" true
+* **./erase_drives.sh** "auto_skip" "/dev/da0 /dev/da1 /dev/da2" "session2" true
 
 _Drives Tested_
 
@@ -250,7 +260,7 @@ The following steps will be performed:
 _Usage_
 
 ```
-[bash] ./erase_drive.sh <drive>
+[bash] ./erase_drive.sh [auto_skip] <drive>
 ```
 
 _Options_
@@ -263,11 +273,13 @@ _Parameters_
 
 |         Parameter         |                   Description                    |
 |           :---:           |                      :---:                       |
+|      Automated Skip       |            Continue without prompting            |
 |           Drive           |                  Drive to erase                  |
 
 _Examples_
 
 * **./erase_drive.sh** "/dev/da3"
+* **./erase_drive.sh** "auto_skip" "/dev/da3"
 
 _Drives Tested_
 
