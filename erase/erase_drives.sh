@@ -45,24 +45,36 @@ stack_vars[${#stack_vars[@]}]=1 ||
 stack_vars[${#stack_vars[@]}]=0
 
 # Determine the exectuable directory (DIR)
-stack_vars[${#stack_vars[@]}]="${BASH_SOURCE%/*}"
-if [[ ! -d "${stack_vars[${#stack_vars[@]}-1]}" ]]; 
-then 
-  stack_vars[${#stack_vars[@]}-1]="${PWD}"; 
+DIR_SRC="${BASH_SOURCE%/*}"
+if [[ ! -d "${DIR_SRC}" ]];
+then
+  DIR_SRC="${PWD}";
 fi
+
+# Convert any relative paths into absolute paths
+DIR_SRC=$(cd ${DIR_SRC}; printf %s. "$PWD")
+DIR_SRC=${DIR_SRC%?}
+
+# Copy over the DIR source and remove the temporary variable
+stack_vars[${#stack_vars[@]}]=${DIR_SRC}
+unset DIR_SRC
+
+# Add Functional Aliases
+SOURCING_INVOCATION () { echo "${stack_vars[${#stack_vars[@]}-2]}"; }
+DIR () { echo "${stack_vars[${#stack_vars[@]}-1]}"; }
 
 ################################################################################
 #                               SCRIPT INCLUDES                                #
 ################################################################################
-. "${stack_vars[${#stack_vars[@]}-1]}/../tmux/start_tmux_session.sh"
-. "${stack_vars[${#stack_vars[@]}-1]}/../tmux/attach_tmux_session.sh"
-. "${stack_vars[${#stack_vars[@]}-1]}/../tmux/split_window_horizontal.sh"
-. "${stack_vars[${#stack_vars[@]}-1]}/../tmux/set_layout_tiled.sh"
-. "${stack_vars[${#stack_vars[@]}-1]}/../tmux/select_session_pane.sh"
-. "${stack_vars[${#stack_vars[@]}-1]}/../tmux/send_tmux_pane_command.sh"
-. "${stack_vars[${#stack_vars[@]}-1]}/../tmux/end_tmux_session.sh"
-. "${stack_vars[${#stack_vars[@]}-1]}/../status/list_drives.sh"
-. "${stack_vars[${#stack_vars[@]}-1]}/erase_drive.sh"
+. "$(DIR)/../tmux/start_tmux_session.sh"
+. "$(DIR)/../tmux/attach_tmux_session.sh"
+. "$(DIR)/../tmux/split_window_horizontal.sh"
+. "$(DIR)/../tmux/set_layout_tiled.sh"
+. "$(DIR)/../tmux/select_session_pane.sh"
+. "$(DIR)/../tmux/send_tmux_pane_command.sh"
+. "$(DIR)/../tmux/end_tmux_session.sh"
+. "$(DIR)/../status/list_drives.sh"
+. "$(DIR)/erase_drive.sh"
 
 ################################################################################
 #                                  FUNCTIONS                                   #
@@ -304,7 +316,7 @@ erase_drives ()
 #   0 - SUCCESS
 #   Non-Zero - ERROR
 #===============================================================================
-if [ ${stack_vars[${#stack_vars[@]}-2]} = 0 ]; # SOURCING_INVOCATION
+if [ $(SOURCING_INVOCATION) = 0 ];
 then
   # Print a copyright/license header
   cat << EOF
