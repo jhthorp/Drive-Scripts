@@ -66,7 +66,7 @@ DIR () { echo "${stack_vars[${#stack_vars[@]}-1]}"; }
 ################################################################################
 #                               SCRIPT INCLUDES                                #
 ################################################################################
-. "$(DIR)/../imaging/run_imaging.sh"
+. "$(DIR)/../../Utility-Scripts/imaging/run_imaging.sh"
 
 ################################################################################
 #                                  FUNCTIONS                                   #
@@ -104,13 +104,13 @@ DIR () { echo "${stack_vars[${#stack_vars[@]}-1]}"; }
 #===============================================================================
 erase_drive ()
 {
-  declare -r drive=${1}
+  local drive=${1}
 
-  declare -r AUTOMATED_SKIP="auto_skip"
-  declare -r IMAGING_BS=1048576
+  local AUTOMATED_SKIP="auto_skip"
+  local IMAGING_BS=1048576
 
-  declare -r BORDER_PC="~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-  declare -r BORDER="${BORDER_PC}${BORDER_PC}${BORDER_PC}${BORDER_PC}"
+  local BORDER_PC="~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  local BORDER="${BORDER_PC}${BORDER_PC}${BORDER_PC}${BORDER_PC}"
 
   version="1.0.0"
   filename=$(echo "${drive}" | 
@@ -164,7 +164,7 @@ EOF
     2>&1
 
   # Print the Drive Capabilities
-  declare -r drive_capabilities=$(smartctl \
+  local drive_capabilities=$(smartctl \
     -c \
     ${drive} \
   )

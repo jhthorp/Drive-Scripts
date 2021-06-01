@@ -66,14 +66,14 @@ DIR () { echo "${stack_vars[${#stack_vars[@]}-1]}"; }
 ################################################################################
 #                               SCRIPT INCLUDES                                #
 ################################################################################
-. "$(DIR)/../tmux/start_tmux_session.sh"
-. "$(DIR)/../tmux/attach_tmux_session.sh"
-. "$(DIR)/../tmux/split_window_horizontal.sh"
-. "$(DIR)/../tmux/set_layout_tiled.sh"
-. "$(DIR)/../tmux/select_session_pane.sh"
-. "$(DIR)/../tmux/send_tmux_pane_command.sh"
-. "$(DIR)/../tmux/end_tmux_session.sh"
-. "$(DIR)/../status/list_drives.sh"
+. "$(DIR)/../../Utility-Scripts/tmux/start_tmux_session.sh"
+. "$(DIR)/../../Utility-Scripts/tmux/attach_tmux_session.sh"
+. "$(DIR)/../../Utility-Scripts/tmux/split_window_horizontal.sh"
+. "$(DIR)/../../Utility-Scripts/tmux/set_layout_tiled.sh"
+. "$(DIR)/../../Utility-Scripts/tmux/select_session_pane.sh"
+. "$(DIR)/../../Utility-Scripts/tmux/send_tmux_pane_command.sh"
+. "$(DIR)/../../Utility-Scripts/tmux/end_tmux_session.sh"
+. "$(DIR)/../../Utility-Scripts/status/list_drives.sh"
 . "$(DIR)/burnin_drive.sh"
 
 ################################################################################
@@ -114,12 +114,12 @@ DIR () { echo "${stack_vars[${#stack_vars[@]}-1]}"; }
 #===============================================================================
 burnin_drives ()
 {
-  declare -r drives_override=${1-null}
-  declare -r zero_drives=${2-false}
-  declare -r session_suffix=${3-null}
-  declare -r end_on_detach=${4-false}
+  local drives_override=${1-null}
+  local zero_drives=${2-false}
+  local session_suffix=${3-null}
+  local end_on_detach=${4-false}
 
-  declare -r AUTOMATED_SKIP="auto_skip"
+  local AUTOMATED_SKIP="auto_skip"
 
   # Start a new TMUX session and attach to it
   TMUX_SESSION_NAME="drive_burnin"
@@ -220,7 +220,7 @@ burnin_drives ()
       # Print the filtered drives being burned in
       echo "Burn-In Drives: [${filtered_drives_to_burnin[@]}]"
 
-      declare -r BURNIN_SCRIPT="./Drive-Scripts/burnin/burnin_drive.sh"
+      local BURNIN_SCRIPT="./Drive-Scripts/burnin/burnin_drive.sh"
 
       # Loop over each selected drive to prepare the TMUX session
       for drive in "${filtered_drives_to_burnin[@]}"

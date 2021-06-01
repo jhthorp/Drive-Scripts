@@ -66,10 +66,10 @@ DIR () { echo "${stack_vars[${#stack_vars[@]}-1]}"; }
 ################################################################################
 #                               SCRIPT INCLUDES                                #
 ################################################################################
-. "$(DIR)/../smart/run_smart_test_with_polling.sh"
-. "$(DIR)/../smart/read_smart_test_results.sh"
-. "$(DIR)/../imaging/run_imaging.sh"
-. "$(DIR)/../badblocks/run_badblocks.sh"
+. "$(DIR)/../../Utility-Scripts/smart/run_smart_test_with_polling.sh"
+. "$(DIR)/../../Utility-Scripts/smart/read_smart_test_results.sh"
+. "$(DIR)/../../Utility-Scripts/imaging/run_imaging.sh"
+. "$(DIR)/../../Utility-Scripts/badblocks/run_badblocks.sh"
 
 ################################################################################
 #                                  FUNCTIONS                                   #
@@ -120,15 +120,15 @@ DIR () { echo "${stack_vars[${#stack_vars[@]}-1]}"; }
 #===============================================================================
 burnin_drive ()
 {
-  declare -r drive=${1}
-  declare -r zero_drive=${2-false}
+  local drive=${1}
+  local zero_drive=${2-false}
 
-  declare -r AUTOMATED_SKIP="auto_skip"
-  declare -r IMAGING_BS=1048576
-  declare -r BADBLOCKS_BS=4096
+  local AUTOMATED_SKIP="auto_skip"
+  local IMAGING_BS=1048576
+  local BADBLOCKS_BS=4096
 
-  declare -r BORDER_PC="~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
-  declare -r BORDER="${BORDER_PC}${BORDER_PC}${BORDER_PC}${BORDER_PC}"
+  local BORDER_PC="~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
+  local BORDER="${BORDER_PC}${BORDER_PC}${BORDER_PC}${BORDER_PC}"
 
   version="1.0.0"
   filename=$(echo "${drive}" | 
@@ -183,7 +183,7 @@ EOF
     2>&1
 
   # Print the Drive Capabilities
-  declare -r drive_capabilities=$(smartctl \
+  local drive_capabilities=$(smartctl \
     -c \
     ${drive} \
   )

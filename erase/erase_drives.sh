@@ -66,14 +66,14 @@ DIR () { echo "${stack_vars[${#stack_vars[@]}-1]}"; }
 ################################################################################
 #                               SCRIPT INCLUDES                                #
 ################################################################################
-. "$(DIR)/../tmux/start_tmux_session.sh"
-. "$(DIR)/../tmux/attach_tmux_session.sh"
-. "$(DIR)/../tmux/split_window_horizontal.sh"
-. "$(DIR)/../tmux/set_layout_tiled.sh"
-. "$(DIR)/../tmux/select_session_pane.sh"
-. "$(DIR)/../tmux/send_tmux_pane_command.sh"
-. "$(DIR)/../tmux/end_tmux_session.sh"
-. "$(DIR)/../status/list_drives.sh"
+. "$(DIR)/../../Utility-Scripts/tmux/start_tmux_session.sh"
+. "$(DIR)/../../Utility-Scripts/tmux/attach_tmux_session.sh"
+. "$(DIR)/../../Utility-Scripts/tmux/split_window_horizontal.sh"
+. "$(DIR)/../../Utility-Scripts/tmux/set_layout_tiled.sh"
+. "$(DIR)/../../Utility-Scripts/tmux/select_session_pane.sh"
+. "$(DIR)/../../Utility-Scripts/tmux/send_tmux_pane_command.sh"
+. "$(DIR)/../../Utility-Scripts/tmux/end_tmux_session.sh"
+. "$(DIR)/../../Utility-Scripts/status/list_drives.sh"
 . "$(DIR)/erase_drive.sh"
 
 ################################################################################
@@ -113,11 +113,11 @@ DIR () { echo "${stack_vars[${#stack_vars[@]}-1]}"; }
 #===============================================================================
 erase_drives ()
 {
-  declare -r drives_override=${1-null}
-  declare -r session_suffix=${2-null}
-  declare -r end_on_detach=${3-false}
+  local drives_override=${1-null}
+  local session_suffix=${2-null}
+  local end_on_detach=${3-false}
 
-  declare -r AUTOMATED_SKIP="auto_skip"
+  local AUTOMATED_SKIP="auto_skip"
 
   # Start a new TMUX session and attach to it
   TMUX_SESSION_NAME="drive_erase"
@@ -218,7 +218,7 @@ erase_drives ()
       # Print the filtered drives being erased
       echo "Erasing Drives: [${filtered_drives_to_erase[@]}]"
 
-      declare -r ERASE_SCRIPT="./Drive-Scripts/erase/erase_drive.sh"
+      local ERASE_SCRIPT="./Drive-Scripts/erase/erase_drive.sh"
 
       # Loop over each selected drive to prepare the TMUX session
       for drive in "${filtered_drives_to_erase[@]}"
