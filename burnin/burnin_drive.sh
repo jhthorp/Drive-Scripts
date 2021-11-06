@@ -408,6 +408,11 @@ EOF
     2>&1 \
   )
 
+  # Print a border
+  echo ${BORDER} \
+    >> ${filename} \
+    2>&1
+
   if [ "${zero_drive}" = true ]
   then
       # Print a border
@@ -429,7 +434,7 @@ EOF
       )
   else # TODO: Add this as a switch?
     # Run a pass with a RANDOM pattern
-    echo "Prepare the drive for data by randomizing the bits..." \
+    echo "Preparing the drive for data by randomizing the bits..." \
       >> ${filename} \
       2>&1
     openssl \
